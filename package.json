@@ -1,0 +1,28 @@
+{
+  "name": "ingsw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "'",
+  "scripts": {
+    "test": "mocha --reporter spec --timeout 10000 --compilers js:babel-core/register",
+    "watch": "mocha --reporter spec --timeout 10000 --watch test/**/*.js* --compilers js:babel-core/register",
+    "start": "nodemon server/app.js --exec babel-node --presets env",
+    "build": "babel server --presets babel-preset-env --out-dir distribution"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://noble3@bitbucket.org/noble3/ingsw.git"
+  },
+  "author": "jeffalex",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/noble3/ingsw#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "nodemon": "^1.18.3"
+  }
+}
