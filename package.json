@@ -18,11 +18,17 @@
   "homepage": "https://bitbucket.org/noble3/ingsw#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "babel-resolver": "^1.1.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "dotenv": "^6.0.0",
+    "dotenv": "^4.0.0",
     "express": "^4.16.3",
+    "express-routes-mapper": "^1.0.2",
     "http": "0.0.0",
-    "nodemon": "^1.18.3"
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.3",
+    "sequelize": "^3.30.2",
+    "sequelize-cli": "^2.6.0"
   }
 }
