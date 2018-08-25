@@ -1,3 +1,5 @@
+import Event from '../models/Event';
+
 class EventController {
     constructor(req,res){
             this.req = req;
@@ -8,10 +10,17 @@ class EventController {
         res.send('created a User');
     }
 
-    getAll (req, res) {
-        res.send('hi Bro!');
-
-    }
+   async getAll  (req, res) {
+        try {
+            const events = await Event.findAll();
+            let response = res.status(200).json({ events });
+            console.log(response.json());
+            return response
+        }catch(err){
+            console.log(err);
+            return res.status(500).json({ msg: 'Internal Server error' });
+        }
+    };
 
     update (req, res) {
             
