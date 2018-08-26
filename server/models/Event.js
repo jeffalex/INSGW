@@ -25,7 +25,7 @@ const Event = db.define("Event",
             field: 'location'
         },
         date: {
-            type: Sequelize.DATE,
+            type: Sequelize.TIME,
             allowNull: false,
             field: 'date',
         },

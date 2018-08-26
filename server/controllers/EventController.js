@@ -7,22 +7,18 @@ class EventController {
             this.res = res;
     }
 
-   async create (req, res) {
-            const { body } = req;
-        try{
-            const event = await Event.create({
-                title: body.title,
-                description: body.description,
-                location: body.location,
-                date: body.date,
-                image: body.image,
-                featured: body.featured
-            });
-            return res.status(200).json({ event });
-        }catch(err){
-            return res.status(500).json({ msg: 'Internal server error!' });
-        }
-    }
+    create (req, res) {
+         Event.create({
+            title: req.body.title,
+            description: req.body.description,
+            location: req.body.location,
+            date: req.body.date,
+            image: req.body.image,
+            featured: req.body.featured,
+         }).then(event => {
+            res.send(event);
+         });
+    };
 
    async getAll (req, res) {
         try {
@@ -34,15 +30,46 @@ class EventController {
         }
     };
 
+
+    async findById(req, res){
+        
+         Event.findById(req.params.id).
+            then(event => {
+                res.send(event);
+            });
+        
+    }   
     update (req, res) {
-            
-    }
 
-    destroy (req,res) {
+        let event = {
+           title: req.body.title,
+           title: req.body.title,
+           description: req.body.description,
+           location: req.body.location,
+           date: req.body.date,
+           image: req.body.image,
+           featured: req.body.featured,
+        }
+        Event.update(event,{
+            where: {
+                id: req.body.id
+            },
+        }).then(event => {
+            res.send(event);
+        }).catch((err) =>{
+            res.render('error', err);
+        });
+    };
 
-    }
+    delete (req,res) {
+        Event.find({
+            where: { id: req.params.id }
+        }).then((result) => {
+            return Event.destroy({ where: {id:  req.body.id}})
+                .then((u) => { return res.send(result) });
+        });
 
-
+    };
 }
 
 export default EventController;

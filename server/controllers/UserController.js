@@ -5,7 +5,7 @@ import authService  from '../services/authService';
 class UserController{
 
     create (req, res) {
-
+            
     }
 
    async getAll  (req, res) {
