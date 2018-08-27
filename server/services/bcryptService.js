@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+const bcrypt = require('bcrypt');
 
 const bcryptService = () =>{
 
@@ -20,4 +20,4 @@ const bcryptService = () =>{
 };
 
 
-export default bcryptService;
+module.exports = bcryptService;
