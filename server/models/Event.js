@@ -1,5 +1,5 @@
-import Sequelize from 'sequelize';
-import db from '../config/database';
+const Sequelize = require('sequelize');
+const db = require('../config/database');
 
 const Event = db.define("Event",
     {
@@ -41,10 +41,10 @@ const Event = db.define("Event",
         },
     },{
         tableName: 'events',
-        timestamps: false
+        timestamps: false,
     }
 
 );
 
 
-export default Event;
+module.exports = Event;
