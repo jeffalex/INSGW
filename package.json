@@ -5,7 +5,8 @@
   "main": "'",
   "scripts": {
     "start": "NODE_ENV=development micro server/app.js --port 3000",
-    "dev": "NODE_ENV=development micro-dev server/app.js --port 3000"
+    "dev": "NODE_ENV=development micro-dev server/app.js --port 3000",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -32,5 +33,8 @@
     "passport": "^0.4.0",
     "sequelize": "^3.30.2",
     "sequelize-cli": "^2.6.0"
+  },
+  "devDependencies": {
+    "jest": "^23.5.0"
   }
 }

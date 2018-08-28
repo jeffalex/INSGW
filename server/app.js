@@ -1,4 +1,4 @@
-const {json, send} = require('micro');
+const {json, send} = require("micro");
 const  {router,get,put,post, del} = require ('microrouter');
 const cors = require('micro-cors')();
 const  authService = require ('./services/authService');
@@ -7,8 +7,8 @@ const  Event = require ('./models/Event');
 const  User = require ('./models/User');
 
 async function createEvent (req, res) {
-    
-    try {
+
+    try {         
         let params = await json(req);
         let  {
             title,
@@ -26,10 +26,10 @@ async function createEvent (req, res) {
             date: date,
             image: image,
             featured: featured,
-         })
-       send(res,200,events);
+         });
+       send(res, 200, events);
     } catch (err){
-            send(res,500,{ err:  'Internal Server error'}); 
+        send(res,404,{ err:  'Internal Server error'}); 
     }
 };
 
@@ -43,64 +43,70 @@ async function getAllEvents (req, res) {
 };
 
 async function findById(req, res){
- try{   
-    const event = await Event.findById(req.params.id)
-        send(res,200,event);
- } catch (err) {
-        send(res,404,{err: 'Internal Server error'});
- }  
+    try {   
+            const event = await Event.findById(req.params.id);
+            send(res, 200, event);
+         } catch (err) {
+            send(res,404,{err: 'Internal Server error'});
+    }  
 }   
 
 async function updateEvent (req, res) {
+
+    
     try {
-        
         let params = await json(req);
-
         let  {
-            id,
-            title,
-            description,
-            location,
-            date,
-            image,
-            featured
-        } = params;
+                id,
+                title,
+                description,
+                location,
+                date,
+                image,
+                featured,
+                token,
+            } = params;
+    
+        if(validate(token)){ 
 
-        let event = {
-            title: title,
-            title: title,
-            description: description,
-            location: location,
-            date: date,
-            image: image,
-            featured: featured,
+            const events = await Event.update({
+                title: title,
+                description: description,
+                location: location,
+                date: date,
+                image: image,
+                featured: featured,
+            },{
+                where: { id: id }
+            })
+            send(res, 200, events);
+        } else {
+            send(res, 404, {err:'Unauthorized'})
         }
-        const events = await Event.update(event,{
-            where: {
-                id: id
-            },
-        })
-        send(res,200,events);
+    
     } catch(err){
-       send(res,404,{err: 'Internal Server error'})
+        send(res,204,{err: 'Internal Server error'})
     }
 };
 
 async function deleteEvent (req,res) {
-  try {  
+
+    try {      
         let params = await json(req);
-        let { id } = params;
-    const event =  await Event.find({ where: { id: id }});
-    const result = Event.destroy({ where: event});
-        send(res,200,result);
-  } catch(err) {
+        let { id, token } = params;
+        if(validate(token)){
+            const result = await Event.destroy({ where: {id: id}});
+            send(res, 200, {msg: 'Event deleted'});
+        }else {
+            send(res, 404, {err: 'Unauthorized'})
+        }
+    } catch(err) {
        send(res,404,{err:'Internal Server error'})
     }
 }
 
 
 async function getAllUsers  (req, res) {
-    
     try {
             const users = await User.findAll();
             send(res,200,users);
@@ -175,9 +181,9 @@ module.exports = cors(router(
     post('/test',test),
     post('/event', createEvent),
     post('/login', login),
+    put('/event', updateEvent),
     get('/users', getAllUsers),
     get('/events', getAllEvents),
     get('/event/:id', findById),
-    put('/event/:id', updateEvent),
     del('/event/:id', deleteEvent),
 ));
