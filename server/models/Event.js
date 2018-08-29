@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const Event = db.define("Event",
-    {
+const Event = db.define('Event', {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
@@ -43,8 +42,6 @@ const Event = db.define("Event",
         tableName: 'events',
         timestamps: false,
     }
-
 );
-
 
 module.exports = Event;
