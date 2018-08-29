@@ -25,7 +25,7 @@
 
 ## test
   `POST` `/test` a test method here defined to ensure the app is running correctly
-  #### payload
+  with payload
   `{
     token: tokenHashHere
     }`
