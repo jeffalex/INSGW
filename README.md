@@ -4,7 +4,7 @@
  * `npm install`
 
 #Run sql code
-### if you want to use the same user at `/config/db` run this mysql sql
+### if you want to use the same user at `/config/db` run this mysql code
  * `USE mysql;`
  * `CREATE USER 'eventuser'@'localhost' IDENTIFIED BY '12345678';`
  * `GRANT ALL PRIVILEGES ON * . * TO 'eventuser'@'localhost';`
